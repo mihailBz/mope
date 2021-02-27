@@ -33,7 +33,11 @@ for i in range(3):
     dxs.append(dx)
 
     # виконуємо нормування факторів
-    xns = [(x-x0)/dx for x in xs]
+    xns = [((x-x0)/dx) for x in xs]
+
+print('\nВиконуємо нормування факторів')
+for el in xns:
+    print(el)
 
 # визначеємо У еталонне
 y_et = as_[0] + as_[1] * x0s[0] + as_[2] * x0s[1] + as_[3] * x0s[2]
