@@ -54,16 +54,27 @@ def cochran_check(Y_matrix):
     return Gp < gt[m - 1]
 
 
+def get_student_value_with_scipy(f_, q_):
+    return Decimal(abs(t.ppf(q_ / 2, f_))).quantize(Decimal('.0001')).__float__()
+
+
 def students_t_test(norm_matrix, Y_matrix):
     mean_Y = np.mean(Y_matrix, axis=1)
     dispersion_Y = np.mean((Y_matrix.T - mean_Y) ** 2, axis=0)
     mean_dispersion = np.mean(dispersion_Y)
     sigma = np.sqrt(mean_dispersion / (N * m))
     betta = np.mean(norm_matrix.T * mean_Y, axis=1)
-    t = np.abs(betta) / sigma
+    ts = np.abs(betta) / sigma
+
+# Розрахунок критерію Студента за допомогою scipy
+    f_ = (m-1)*N
+    q_ = 0.05
+    t_ = get_student_value_with_scipy(f_, q_)
+
+
     if (m - 1) * N > 32:
-        return np.where(t > 1.96)
-    return np.where(t > tt[(m - 1) * N])
+        return np.where(ts > t_)
+    return np.where(ts > tt[(m - 1) * N])
 
 
 def phisher_criterion(Y_matrix, d):
