@@ -207,4 +207,4 @@ for _ in range(100):
     fisher_criteria(m, N, d, naturalized_factors_table, y_arr, beta_coefficients, importance)
 
 print('\nСередній час пошуку коефіцієнтів: ')
-print(round(sum(times)/len(times), 3))
+print(round(sum(times)/len(times), 5))
