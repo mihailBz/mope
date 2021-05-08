@@ -1,6 +1,6 @@
 import math
 from decimal import Decimal
-from scipy.stats import f, t, ttest_ind, norm
+from scipy.stats import f, t
 import random
 from functools import reduce
 from itertools import compress
@@ -102,7 +102,6 @@ def student_criteria(m, N, y_table, beta_coefficients):
     variation_beta_s = average_variation/N/m
     standard_deviation_beta_s = math.sqrt(variation_beta_s)
     x_vals = [x_i(i) for i in range(11)]
-    # coefficients_beta_s = np.array([round(np.average(y_averages*x_vals[i]),3) for i in range(len(x_vals))])
     t_i = np.array([abs(beta_coefficients[i])/standard_deviation_beta_s for i in range(len(beta_coefficients))])
     f3 = (m-1)*N
     q = 0.05
