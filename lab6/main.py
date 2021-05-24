@@ -148,6 +148,9 @@ def student_criteria(m, N, y_table, beta_coefficients):
     q = 0.05
     t_our = get_student_value(f3, q)
     importance = [True if el > t_our else False for el in list(t_i)]
+    if sum(importance) == 3:
+    	print('Кількість значимих коефіцієнтів дорівнює 3, отже модель неадекватна')
+    	exit()
     # print result data
     print("Оцінки коефіцієнтів βs: " + ", ".join(list(map(lambda x: str(round(float(x), 3)), beta_coefficients))))
     print("Коефіцієнти ts: " + ", ".join(list(map(lambda i: "{:.2f}".format(i), t_i))))
